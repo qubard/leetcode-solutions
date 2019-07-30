@@ -9,7 +9,6 @@
  */
 class Solution {
     ArrayList<Integer> ret = new ArrayList<>();
-    
     Stack<TreeNode> stk = new Stack<>();
 
     public List<Integer> inorderTraversal(TreeNode root) {
@@ -17,32 +16,15 @@ class Solution {
 
         TreeNode curr = root;
 
-        while (true) {
+        while (curr != null || !stk.isEmpty()) {
             while (curr != null) {
                 stk.push(curr);
-                if (curr.left != null) {
-                    curr = curr.left;
-                } else {
-                    break;
-                }
+                curr = curr.left;
             }
             
-            if (curr != null) {
-                if (curr.right != null) {
-                    curr = stk.pop();
-                    ret.add(curr.val);
-                } else {
-                    while (curr.right == null && !stk.isEmpty()) {
-                        curr = stk.pop();
-                        ret.add(curr.val);
-                    }
-                }
-                
-                curr = curr.right;
-            } else {
-                break;
-            }
-            
+            curr = stk.pop();
+            ret.add(curr.val);
+            curr = curr.right;
         }
         
         return ret;
