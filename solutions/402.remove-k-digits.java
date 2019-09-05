@@ -13,7 +13,7 @@ class Solution {
         // removing the second digit. So, we can iterate over each digit
         // and do k removals then finish.
         // You keep a stack of teh digits
-        // and you compare the number you look at to the number on teh stack
+        // and you compare the number you look at to the number on the stack
         // If it's smaller, pop the number off the stack
         
         // We use a stack because we have situations like 99641 where if we remove 3 digits
