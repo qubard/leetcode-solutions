@@ -2,7 +2,6 @@ class Solution {
     public int[] relativeSortArray(int[] arr1, int[] arr2) {
         List<Integer> a = new ArrayList<Integer>();
         HashMap<Integer, Integer> ind = new HashMap<>();
-        
         for (int i = 0; i < arr2.length; i++) {
             ind.put(arr2[i], i);
         }
@@ -12,10 +11,10 @@ class Solution {
         
         a.sort((e, b) -> {
             if (!ind.containsKey(e) || !ind.containsKey(b)) {
-                if (!ind.containsKey(b)) {
+                if (!ind.containsKey(e) && !ind.containsKey(b)) {
                     return e - b;
                 }
-                return 1;
+                return 0; // ignore (they are equal)
             }
             int i = ind.get(e);
             int j = ind.get(b);
