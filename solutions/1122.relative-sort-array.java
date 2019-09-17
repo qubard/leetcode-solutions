@@ -10,14 +10,11 @@ class Solution {
         }
         
         a.sort((e, b) -> {
-            if (!ind.containsKey(e) || !ind.containsKey(b)) {
-                if (!ind.containsKey(e) && !ind.containsKey(b)) {
-                    return e - b;
-                }
-                return 0; // ignore (they are equal)
+            if (!ind.containsKey(e) && !ind.containsKey(b)) {
+                return e - b;
             }
-            int i = ind.get(e);
-            int j = ind.get(b);
+            int i = ind.getOrDefault(e, a.size());
+            int j = ind.getOrDefault(b, a.size());
             return i - j;
         });
         
