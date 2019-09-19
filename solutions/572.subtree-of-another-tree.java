@@ -7,24 +7,16 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+ // Can also do pre-order traversals for both trees and compare those
 class Solution {
     public boolean equalTree(TreeNode s, TreeNode t) {
         if (s == null && t == null) return true;
-        
-        if ((s == null && t != null) || (t == null && s != null)) {
+
+        if (s == null || t == null) 
             return false;
-        }
-        
-        if (s.left == null && t.left != null) {
-            return false;
-        }
-        
-        if (s.right == null && t.right != null) {
-            return false;
-        }
         
         if (t.val == s.val) {
-            return equalTree(s.right, t.right) &&  equalTree(s.left, t.left);
+            return equalTree(s.right, t.right) && equalTree(s.left, t.left);
         }
         
         return false;

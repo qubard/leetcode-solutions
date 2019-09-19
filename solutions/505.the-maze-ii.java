@@ -2,7 +2,6 @@ class Solution {
     
     public Integer sol = null;
     
-    public boolean[][] visited;
     public int[][] distance;
     
     public boolean valid(int[][] maze, int x, int y) {
@@ -25,6 +24,7 @@ class Solution {
         }
         
         // I should have pruned the path by comparing the current distance, then this works
+        // And we don't need a visited array (since monotonically increasing distances occur in loops)
         
         for (int[] move : dir) {
             int i = 0;
@@ -37,18 +37,14 @@ class Solution {
             cy = y + move[1] * i;
             
             // cx, cy is a valid posiiton
-            if (valid(maze, cx, cy) && (cx != x || cy != y) && !visited[cy][cx] && distance[cy][cx] > cost + i) {
-                visited[cy][cx] = true;
+            if (valid(maze, cx, cy) && (cx != x || cy != y) && distance[cy][cx] > cost + i) {
                 distance[cy][cx] = cost + i;
                 dfs(maze, new int[]{cy, cx}, dest, cost + i);
-                visited[cy][cx] = false;
             }
         }
-        
     }
     
     public int shortestDistance(int[][] maze, int[] start, int[] destination) {
-        visited = new boolean[maze.length][maze[0].length];
         distance = new int[maze.length][maze[0].length];
         for (int i = 0; i < maze.length; i++) {
             for (int y = 0; y < maze[i].length; y++) {

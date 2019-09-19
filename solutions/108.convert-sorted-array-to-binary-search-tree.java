@@ -13,11 +13,9 @@ class Solution {
         
         int mid = start + (end - start) / 2;
         if (end == start) return new TreeNode(nums[mid]);
-        if (end - start == 1) {
-            TreeNode root;
-            root = new TreeNode(nums[end]);
-            root.left = new TreeNode(nums[start]);
-            return root;
+        
+        if (start > end) {
+            return null;
         }
             
         TreeNode root = new TreeNode(nums[mid]);
