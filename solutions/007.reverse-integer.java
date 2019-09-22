@@ -1,41 +1,18 @@
 class Solution {
-    // we def don't NEED this
-    public long toNum(String s) {
-        long pow = 1;
-        long v = 0;
-        for (int i = s.length() - 1; i >= 0; i--) {
-            char c = s.charAt(i);
-            v += pow * (c - '0');
-            pow *= 10;
+    public int reverse2(int x) {
+        int sum = 0;
+        while (x > 0) {
+            if (sum > Integer.MAX_VALUE/10 || (sum == Integer.MAX_VALUE / 10 && x % 10 > 7)) 
+                return 0;
+            sum = sum * 10 + x % 10;
+            x /= 10;
         }
-        return v;
+        
+        return sum;
     }
     
     public int reverse(int x) {
         boolean neg = x < 0;
-        String rev = new StringBuilder(Integer.toString(Math.abs(x))).reverse().toString();
-        
-        if (rev.length() >= 1 && rev.charAt(0) == '0') {
-            int maxI = 0;
-            for (int i = 1; i < rev.length(); i++) {
-                if (rev.charAt(i) != '0') {
-                    maxI = i;
-                    break;
-                }
-            }
-            rev = rev.substring(maxI, rev.length());
-        }
-        
-        long val = toNum(rev);
-        
-        if (val > Math.pow(2, 31) - 1 || val <= -Math.pow(2,31)) {
-            return 0;
-        }
-        
-        if (neg) {
-            return -(int)val;
-        }
-        
-        return (int)val;
+        return reverse2(Math.abs(x)) * (neg ? -1 : 1);
     }
 }
