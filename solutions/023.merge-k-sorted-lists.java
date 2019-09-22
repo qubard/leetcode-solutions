@@ -7,14 +7,13 @@
  * }
  */
 class Solution {
+    // O(N Logk) solution
     public ListNode mergeKLists(ListNode[] lists) {
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        PriorityQueue<ListNode> pq = new PriorityQueue<>((a,b) -> a.val - b.val);
         for (ListNode node : lists) {
             ListNode curr = node;
-            while (curr != null) {
-                pq.add(curr.val);
-                curr = curr.next;
-            }
+            if (curr != null)
+                pq.add(curr);
         }
         
         if (pq.isEmpty()) {
@@ -24,7 +23,12 @@ class Solution {
         ListNode root = new ListNode(0);
         ListNode curr = root;
         while (!pq.isEmpty()){ 
-            curr.val = pq.poll();
+            ListNode node = pq.poll();
+            curr.val = node.val;
+            if (node.next != null) {
+                pq.add(node.next);
+            }
+            
             if (!pq.isEmpty()) {
                 curr.next = new ListNode(0);
                 curr = curr.next;
