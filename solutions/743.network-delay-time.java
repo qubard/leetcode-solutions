@@ -31,14 +31,12 @@ class Solution {
             if (i != K) pq.add(i);
         }
         
-        HashSet<Integer> visited = new HashSet<>();
-        
+        // If you have negative weights you need the visited set
         while (!pq.isEmpty()) {
             int u = pq.remove();
-            visited.add(u);
             
             for (int i = 1; i <= N; i++) {
-                if (!visited.contains(i) && weights[u][i] >= 0 && i != u) {
+                if (weights[u][i] >= 0 && i != u) {
                     int alt = dist[u] + weights[u][i];
                     if (alt < dist[i]) {
                         dist[i] = alt;
