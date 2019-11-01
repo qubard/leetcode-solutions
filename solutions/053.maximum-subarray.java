@@ -1,4 +1,4 @@
-class Solution {
+    class Solution {
     public int maxSubArray(int[] nums) {
         // Kadane's algorithm
         int sum = 0;
