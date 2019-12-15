@@ -11,28 +11,16 @@ public:
 class Solution {
 public:
     Node* inorderSuccessor(Node* node) {
-        Node* root = node;
-
-        while (root->parent != NULL) root = root->parent;
-
-        std::stack<Node*> stk;
-        Node* curr = root;
-        while (!stk.empty() || curr != NULL) {
-            while (curr != NULL) {
-                stk.push(curr);
-                curr = curr->left;
-            }
-
-            curr = stk.top();
-            stk.pop();
-            // process curr
-            if (curr->val > node->val) {
-                return curr;
-            }
-
-            curr = curr->right;
+        if (node->right != NULL) {
+            node = node->right;
+            while (node->left != NULL) node = node->left;
+            return node;
         }
-
-        return NULL;
+        
+        while (node->parent != NULL && node->parent->right == node) {
+            node = node->parent;
+        }
+        
+        return node->parent;
     }
 };
