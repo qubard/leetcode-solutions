@@ -24,7 +24,7 @@ public:
     void dfs(int src, int parent, vector<vector<int>>& adj, int depth) {
         for (int& child: adj[v]) {
             if (child != parent) {
-                dfs(child, src, adj, depth  1);
+                dfs(child, src, adj, depth + 1);
                 auto p = make_pair(depth, src);
                 
                 if (p > best) {
