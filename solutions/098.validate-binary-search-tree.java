@@ -37,3 +37,34 @@ class Solution {
       return true;
   }
 }
+
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+ /* 
+ // Recursive solution
+#include <climits> 
+class Solution {
+public:
+    bool isValidBST(TreeNode* root) {
+        return isValid(root, NULL, NULL);
+    }
+    
+    bool isValid(TreeNode* root, int* min, int* max) {
+        if (root == NULL) return true;
+        
+        if ((min != NULL && root->val <= *min) || (max != NULL && root->val >= *max)) {
+            return false;
+        }
+        
+        return isValid(root->left, min, &root->val) && isValid(root->right, &root->val, max);
+    }
+};
+*/
